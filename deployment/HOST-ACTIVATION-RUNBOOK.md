@@ -50,5 +50,31 @@ the repository.
    service to the production port. Keep the old unit available for rollback.
    Never leave both Gateways active on the same port.
 
+## Refreshing an existing installation
+
+When `/opt/openclaw-workspace` already contains a managed public package, do
+not copy files over it and do not use the Git checkout as the source. Build a
+new package outside the repository, run the public checks, then use the
+controlled activation script:
+
+```bash
+package_parent="$(mktemp -d /tmp/openclaw-refresh.XXXXXX)"
+bash distribution/build-public-package.sh "$package_parent/package"
+bash verification/public-secret-scan.sh "$package_parent/package"
+bash verification/test-public-package-clean-room.sh "$package_parent/package"
+
+sudo bash deployment/activate-privileged-runtime.sh \
+  "$package_parent/package" \
+  /opt/openclaw-runtime/openclaw \
+  /path/to/the-user-openclaw.json
+```
+
+The activation script refreshes the complete immutable workspace and runtime
+trees, renders the local config, reloads systemd, and restarts the broker and
+Gateway. It must therefore be treated as a controlled service switch. After
+it returns, verify the installed `PUBLIC_PACKAGE_MANIFEST.json`, runtime
+integrity, both active units, and the private Discord approval E2E before
+declaring the refresh complete.
+
 Rollback is the reverse order: stop the new system service, restore the old user
 service, and leave all capability files expired or consumed.
