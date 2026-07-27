@@ -12,7 +12,7 @@ approver="$(jq -r '.subject // .approver' "$run_dir/identity.json")"
 ledger_path="${OPENCLAW_LIVE_APPROVAL_LEDGER_PATH:-/var/lib/openclaw-gateway/live-approval-ledger.json}"
 mkdir -p "$(dirname "$ledger_path")" || { printf '%s\n' 'EVIDENCE_LEDGER_BLOCKED: ledger directory unavailable' >&2; exit 2; }
 entries='[]'
-for name in preflight identity delivery apply verification evaluator; do
+for name in preflight identity delivery apply verification evaluator-result; do
   file="$run_dir/$name.json"
   status="$(jq -r '.status // "UNKNOWN"' "$file")"
   digest="$(sha256sum "$file" | awk '{print $1}')"
