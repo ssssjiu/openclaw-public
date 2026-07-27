@@ -1,5 +1,9 @@
 # OpenClaw safety gate distribution
 
+This package is the public, sanitized distribution surface. It is not the
+private development workspace and it never receives Discord tokens, Gateway
+secrets, personal paths, or approval identities.
+
 This package contains the generic approval-boundary core. It does not contain
 personal workspace paths, Discord identities, credentials, fixtures, or private
 workflow definitions. Copy `config/runtime.example.json` to a local runtime
@@ -37,3 +41,18 @@ enabled or started by the installer.
 The installer rejects a non-generated package, private repository metadata,
 credential-like files, incomplete runtimes, and unsafe ownership/layouts. This
 keeps the GitHub artifact reusable without publishing your identity or secrets.
+
+### Required values
+
+- `runtime-source`: a complete official OpenClaw runtime directory containing
+  `dist/` and its installed dependencies.
+- `source-config`: the recipient's own OpenClaw JSON config from onboarding.
+- `approver-id`: the recipient's Discord user ID in the form
+  `discord:<digits>`.
+- `gateway-secrets.json`: a local JSON secret reference file for Gateway auth.
+- `DISCORD_BOT_TOKEN`: entered interactively or supplied only through a
+  protected environment for automation.
+
+The installer renders local paths under `/opt/openclaw-workspace` and
+`/var/lib/openclaw-gateway`; no personal home path or private repository path
+is copied into the deployment.
