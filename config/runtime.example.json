@@ -1,0 +1,7 @@
+{
+  "approver": "discord:<YOUR_APPROVER_ID>",
+  "workspaceRoot": "/opt/openclaw-workspace",
+  "capabilityRoot": "/var/lib/openclaw-broker/capabilities",
+  "brokerSocket": "/run/openclaw-broker/broker.sock",
+  "allowedRemoteHosts": ["github.com"]
+}

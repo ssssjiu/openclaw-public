@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/contracts/mutation-capability.schema.json",
+  "title": "One-time approval-bound mutation capability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "operation", "runDir", "flowId", "revision", "approvalId", "approver", "targetHash", "criteriaHash", "workflowHash", "evidenceHash", "issuedAtMs", "expiresAtMs", "nonce", "capabilitySha256"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "status": {"const": "APPROVED"},
+    "operation": {"type": "string", "minLength": 1},
+    "runDir": {"type": "string", "pattern": "^/[^\\n]+$"},
+    "flowId": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 0},
+    "approvalId": {"type": "string", "minLength": 1},
+    "approver": {"type": "string", "pattern": "^discord:[0-9]+$"},
+    "targetHash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "criteriaHash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "workflowHash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "evidenceHash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "issuedAtMs": {"type": "integer", "minimum": 0},
+    "expiresAtMs": {"type": "integer", "minimum": 1},
+    "nonce": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "capabilitySha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

@@ -1,0 +1,23 @@
+[Unit]
+Description=OpenClaw approval capability broker
+After=local-fs.target
+
+[Service]
+User=openclaw-broker
+Group=openclaw-gateway
+SupplementaryGroups=openclaw-gateway
+Type=simple
+Environment=OPENCLAW_RUNTIME_CONFIG=/etc/openclaw/runtime.json
+ExecStart=/usr/bin/python3 /opt/openclaw-workspace/verification/approval-broker-daemon.py --socket /run/openclaw-broker/broker.sock --capability-root /var/lib/openclaw-broker/capabilities --broker-script /opt/openclaw-workspace/verification/approval-broker.sh
+RuntimeDirectory=openclaw-broker
+RuntimeDirectoryMode=0750
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/openclaw-workspace/verification
+ReadWritePaths=/var/lib/openclaw-broker /run/openclaw-broker
+
+[Install]
+WantedBy=multi-user.target

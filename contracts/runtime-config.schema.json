@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/contracts/runtime-config.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approver", "workspaceRoot", "capabilityRoot", "brokerSocket", "allowedRemoteHosts"],
+  "properties": {
+    "approver": {"type": "string", "pattern": "^discord:[0-9]+$"},
+    "workspaceRoot": {"type": "string", "pattern": "^/"},
+    "capabilityRoot": {"type": "string", "pattern": "^/"},
+    "brokerSocket": {"type": "string", "pattern": "^/"},
+    "allowedRemoteHosts": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1}
+  }
+}

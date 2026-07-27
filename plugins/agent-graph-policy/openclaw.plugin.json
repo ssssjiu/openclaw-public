@@ -1,0 +1,14 @@
+{
+  "id": "agent-graph-policy",
+  "name": "Agent Graph Policy",
+  "description": "Requires graph context for subagent runs.",
+  "version": "0.1.0",
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

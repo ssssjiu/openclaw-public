@@ -1,0 +1,29 @@
+[Unit]
+Description=OpenClaw Gateway (isolated service user)
+After=network-online.target openclaw-broker.service
+Wants=network-online.target
+
+[Service]
+User=openclaw-gateway
+Group=openclaw-gateway
+WorkingDirectory=/opt/openclaw-runtime
+EnvironmentFile=/etc/openclaw/discord.env
+Environment=HOME=/var/lib/openclaw-gateway
+Environment=OPENCLAW_STATE_DIR=/var/lib/openclaw-gateway
+Environment=OPENCLAW_WORKSPACE_ROOT=/opt/openclaw-workspace
+Environment=OPENCLAW_CONFIG_PATH=/etc/openclaw/openclaw.json
+Environment=OPENCLAW_RUNTIME_CONFIG=/etc/openclaw/runtime.json
+Environment=OPENCLAW_BROKER_SOCKET=/run/openclaw-broker/broker.sock
+Environment=OPENCLAW_APPROVAL_CAPABILITY_ROOT=/var/lib/openclaw-broker/capabilities
+ExecStart=/usr/bin/node /opt/openclaw-runtime/openclaw/dist/index.js gateway --port 18789
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/openclaw-runtime /opt/openclaw-workspace
+ReadWritePaths=/var/lib/openclaw-gateway
+
+[Install]
+WantedBy=multi-user.target
