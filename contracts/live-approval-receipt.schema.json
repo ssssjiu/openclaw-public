@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/contracts/live-approval-receipt.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "approvalRequired", "approvalResolved", "runDir", "target", "flowId", "approvalId", "approver", "ledgerStatus", "rollbackStatus", "ledgerSha256", "mutationCount", "temporaryFixtureRemoved", "noApprovalRequired"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "status": {"const": "LIVE_APPROVAL_E2E_PASS"},
+    "approvalRequired": {"const": true},
+    "approvalResolved": {"const": true},
+    "runDir": {"type": "string", "minLength": 1},
+    "target": {"type": "string", "minLength": 1},
+    "flowId": {"type": "string", "minLength": 1},
+    "approvalId": {"type": "string", "minLength": 1},
+    "approver": {"type": "string", "pattern": "^discord:[0-9]+$"},
+    "ledgerStatus": {"const": "EVIDENCE_LEDGER_PASS"},
+    "rollbackStatus": {"const": "ROLLBACK_PASS"},
+    "ledgerSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "mutationCount": {"const": 1},
+    "temporaryFixtureRemoved": {"const": true},
+    "noApprovalRequired": {"const": false}
+  }
+}
