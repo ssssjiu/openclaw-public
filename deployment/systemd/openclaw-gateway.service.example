@@ -15,6 +15,7 @@ Environment=OPENCLAW_CONFIG_PATH=/etc/openclaw/openclaw.json
 Environment=OPENCLAW_RUNTIME_CONFIG=/etc/openclaw/runtime.json
 Environment=OPENCLAW_BROKER_SOCKET=/run/openclaw-broker/broker.sock
 Environment=OPENCLAW_APPROVAL_CAPABILITY_ROOT=/var/lib/openclaw-broker/capabilities
+Environment=OPENCLAW_APPROVAL_EVIDENCE_DIR=/var/lib/openclaw-gateway/approval-evidence
 ExecStart=/usr/bin/node /opt/openclaw-runtime/openclaw/dist/index.js gateway --port 18789
 Restart=on-failure
 RestartSec=5
@@ -23,7 +24,7 @@ PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
 ReadOnlyPaths=/opt/openclaw-runtime /opt/openclaw-workspace
-ReadWritePaths=/var/lib/openclaw-gateway
+ReadWritePaths=/var/lib/openclaw-gateway /var/lib/openclaw-gateway/approval-evidence
 
 [Install]
 WantedBy=multi-user.target

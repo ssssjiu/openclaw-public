@@ -67,6 +67,7 @@ bash "$root/verification/check-runtime-integrity.sh" "$runtime_payload" >/dev/nu
 
 install -d -o root -g root -m 755 /etc/openclaw
 install -d -o openclaw-broker -g openclaw-gateway -m 750 /var/lib/openclaw-broker /var/lib/openclaw-broker/capabilities
+install -d -o openclaw-gateway -g openclaw-gateway -m 750 /var/lib/openclaw-gateway/approval-evidence
 
 # Refresh must replace the complete immutable trees. Copying over an existing
 # tree leaves hashed JS chunks from older builds behind and can create a

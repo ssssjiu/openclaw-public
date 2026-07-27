@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/contracts/approval-delivery-evidence.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "approvalId", "approvalKind", "channel", "target", "accountId", "messageIds", "deliveredAt"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "status": {"const": "PASS"},
+    "approvalId": {"type": "string", "minLength": 1},
+    "approvalKind": {"enum": ["exec", "plugin"]},
+    "channel": {"const": "discord"},
+    "target": {"type": "string", "minLength": 1},
+    "accountId": {"type": "string", "minLength": 1},
+    "messageIds": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "deliveredAt": {"type": "string", "format": "date-time"}
+  }
+}

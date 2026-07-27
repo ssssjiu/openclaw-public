@@ -14,6 +14,7 @@ or a complete OpenClaw runtime.
 - A broker boundary for approved actions
 - Runtime and package integrity checks
 - A sanitized public-package builder and installer
+- Delivery evidence and an independent evidence-ledger verifier
 - Systemd examples for the Gateway and approval broker
 
 The installer never enables or starts services automatically.
@@ -55,6 +56,11 @@ The installer writes secrets only to:
 
 - `/etc/openclaw/discord.env` with mode `600`
 - `/etc/openclaw/gateway-secrets.json` with mode `600`
+
+The package also records one-time Discord delivery evidence and requires an
+independent evidence ledger before a scoped mutation can be reported as
+complete. Missing, stale, contradictory, or unverifiable evidence fails
+closed.
 
 It installs the sanitized workspace under `/opt/openclaw-workspace` and the
 runtime under `/opt/openclaw-runtime`.

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/contracts/evidence-ledger.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "runDir", "flowId", "approvalId", "approver", "entries", "mutationCount"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "status": {"const": "EVIDENCE_LEDGER_PASS"},
+    "runDir": {"type": "string", "minLength": 1},
+    "target": {"type": "string", "minLength": 1},
+    "flowId": {"type": "string", "minLength": 1},
+    "approvalId": {"type": "string", "minLength": 1},
+    "approver": {"type": "string", "pattern": "^discord:[0-9]+$"},
+    "mutationCount": {"const": 1},
+    "entries": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["name", "status", "sha256"],
+        "properties": {
+          "name": {"type": "string"},
+          "status": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    }
+  }
+}
