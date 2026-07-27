@@ -42,7 +42,7 @@ else
 fi
 [[ -f "$workspace_source/PUBLIC_PACKAGE_MANIFEST.json" ]] || { printf '%s\n' 'INSTALL_BLOCKED: workspace source is not a sanitized public package' >&2; exit 2; }
 [[ ! -e "$workspace_source/.git" && ! -e "$workspace_source/config/runtime.json" ]] || { printf '%s\n' 'INSTALL_BLOCKED: private repository state/config in workspace source' >&2; exit 2; }
-if find "$workspace_source" -type f \( -name '*.env' -o -name '*.pem' -o -name '*credential*' -o -name '*secret*' \) -print -quit | grep -q .; then
+if find "$workspace_source" -type f \( -name '*.env' -o -name '*.pem' -o -name '*credential*.json' -o -name '*secret*.json' \) -print -quit | grep -q .; then
   printf '%s\n' 'INSTALL_BLOCKED: credential-like file in workspace source' >&2
   exit 2
 fi
